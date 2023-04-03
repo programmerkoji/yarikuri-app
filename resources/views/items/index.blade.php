@@ -5,18 +5,27 @@
                 <div class="p-4 text-gray-900">
 
                     <div class="relative overflow-x-auto">
+                        {{-- @foreach ($items as $item)
+                            {{$item->name}}
+                        @endforeach --}}
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 min-w-max">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-3 py-2 text-center">
                                         &nbsp;
                                     </th>
-                                    @foreach ($items as $item)
-                                        <th scope="col" class="px-3 py-2 text-center">
-                                            <p class="mb-1">{{$item->name}}</p>
-                                            <p>{{number_format($item->price)}}円</p>
-                                        </th>
-                                    @endforeach
+                                    <th scope="col" class="px-3 py-2 text-center">
+                                        <p class="mb-1">家更新</p>
+                                        <p>4,000円</p>
+                                    </th>
+                                    <th scope="col" class="px-3 py-2 text-center">
+                                        <p class="mb-1">ガソリン代</p>
+                                        <p>8,000円</p>
+                                    </th>
+                                    <th scope="col" class="px-3 py-2 text-center">
+                                        <p class="mb-1">タイヤなど</p>
+                                        <p>3,000円</p>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
