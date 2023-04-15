@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Repositories\ItemRepository;
+use App\Http\Repositories\MonthRepository;
 
 class DashboardController extends Controller
 {
@@ -13,21 +14,27 @@ class DashboardController extends Controller
     protected $item;
 
     /**
-     * @param ItemRepository
+     * @var MonthRepository
      */
-    public function __construct(ItemRepository $item)
+    protected $month;
+
+    /**
+     * @param ItemRepository
+     * @param MonthRepository
+     */
+    public function __construct(ItemRepository $item, MonthRepository $month)
     {
-        return $this->ItemRepository = $item;
+        $this->ItemRepository = $item;
+        $this->MonthRepository = $month;
     }
 
     /**
      * @return void
      */
-    public function item()
+    public function index()
     {
         $items = $this->ItemRepository->index();
-        return view('dashboard', compact('items'));
+        $months = $this->MonthRepository->index();
+        return view('dashboard', compact('items', 'months'));
     }
-
-
 }
