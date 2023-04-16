@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\ItemMonthRepository;
 use Illuminate\Http\Request;
 use App\Http\Repositories\ItemRepository;
 use App\Http\Repositories\MonthRepository;
+use App\Models\Item;
+use App\Models\Month;
 
 class DashboardController extends Controller
 {
@@ -19,13 +22,20 @@ class DashboardController extends Controller
     protected $month;
 
     /**
+     * @var ItemMonthRepository
+     */
+    protected $itemMonth;
+
+    /**
      * @param ItemRepository
      * @param MonthRepository
+     * @param ItemMonthRepository
      */
-    public function __construct(ItemRepository $item, MonthRepository $month)
+    public function __construct(ItemRepository $item, MonthRepository $month, ItemMonthRepository $itemMonth)
     {
         $this->ItemRepository = $item;
         $this->MonthRepository = $month;
+        $this->ItemMonthRepository = $itemMonth;
     }
 
     /**
@@ -35,6 +45,7 @@ class DashboardController extends Controller
     {
         $items = $this->ItemRepository->index();
         $months = $this->MonthRepository->index();
+
         return view('dashboard', compact('items', 'months'));
     }
 }

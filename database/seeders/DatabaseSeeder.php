@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ItemSeeder::class,
             MonthSeeder::class,
+            ItemMonthSeeder::class,
         ]);
     }
 }

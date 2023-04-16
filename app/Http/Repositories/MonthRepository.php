@@ -27,20 +27,4 @@ class MonthRepository
     {
         return $this->month->get();
     }
-
-    /**
-     * @param array $data
-     */
-    // public function store($data)
-    // {
-    //     try {
-    //         DB::beginTransacation();
-    //         $month = new Month;
-    //         $month->fill($data)->save();
-    //         DB::commit();
-    //     } catch (\Throwable $th) {
-    //         Log::error($th);
-    //         DB::rollback();
-    //     }
-    // }
 }

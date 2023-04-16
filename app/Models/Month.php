@@ -13,4 +13,11 @@ class Month extends Model
         'year',
         'month',
     ];
+
+    public function items()
+    {
+        return $this
+            ->belongsToMany(Item::class, 'item_months')
+            ->withPivot('is_checked');
+    }
 }
