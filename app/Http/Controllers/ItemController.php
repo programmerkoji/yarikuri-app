@@ -54,17 +54,23 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
+        $item = $this->ItemRepository->findById($id);
 
+        return view('items.edit', compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ItemPostRequest $request, int $id)
     {
-        //
+        $this->ItemRepository->update($request->validated(), $id);
+
+        return redirect()
+            ->route('items.index')
+            ->with('message', '項目を更新しました');
     }
 
     /**

@@ -33,12 +33,35 @@ class ItemRepository
     /**
      * @param array $data
      */
-    public function store($data)
+    public function store(array $data)
     {
         try {
             FacadesDB::beginTransaction();
             $item = new Item;
             $item->fill($data)->save();
+            FacadesDB::commit();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            FacadesDB::rollback();
+        }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function findById(int $id)
+    {
+        return $this->item->findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     */
+    public function update(array $data, int $id)
+    {
+        try {
+            FacadesDB::beginTransaction();
+            $this->findById($id)->fill($data)->save();
             FacadesDB::commit();
         } catch (\Throwable $th) {
             Log::error($th);
