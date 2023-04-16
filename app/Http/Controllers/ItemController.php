@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\ItemRepository;
+use App\Http\Requests\ItemPostRequest;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -34,15 +35,20 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('items.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param  $request
      */
-    public function store(Request $request)
+    public function store(ItemPostRequest $request)
     {
-        //
+        $this->ItemRepository->store($request->validated());
+
+        return redirect()
+            ->route('items.index')
+            ->with('message', '項目を登録しました');
     }
 
     /**
@@ -50,7 +56,7 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**

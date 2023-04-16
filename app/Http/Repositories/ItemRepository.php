@@ -4,6 +4,8 @@ namespace App\Http\Repositories;
 
 use App\Models\Item;
 use Illuminate\Suppoort\Facades\DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Log;
 
 class ItemRepository
 {
@@ -34,13 +36,13 @@ class ItemRepository
     public function store($data)
     {
         try {
-            DB::beginTransacation();
+            FacadesDB::beginTransaction();
             $item = new Item;
             $item->fill($data)->save();
-            DB::commit();
+            FacadesDB::commit();
         } catch (\Throwable $th) {
             Log::error($th);
-            DB::rollback();
+            FacadesDB::rollback();
         }
     }
 }

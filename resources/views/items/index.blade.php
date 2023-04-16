@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900">
                     <div class="py-4">
-                        <a href="" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">項目追加</a>
+                        <a href="{{route('items.create')}}" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded">項目追加</a>
                     </div>
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 min-w-max">
@@ -36,7 +36,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center gap-2">
-                                                <a href="" class="inline-flex text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded">編集</a>
+                                                <a href="{{route('items.edit', ['item' => $item->id])}}" class="inline-flex text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded">編集</a>
                                                 <a href="" class="inline-flex text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded">削除</a>
                                             </div>
                                         </td>
