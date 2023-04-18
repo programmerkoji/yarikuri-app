@@ -21,6 +21,11 @@
                         項目一覧
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('months.index')" :active="request()->routeIs('months.index')">
+                        年月一覧
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -79,6 +84,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
                 項目一覧
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('months.index')" :active="request()->routeIs('months.index')">
+                年月一覧
             </x-responsive-nav-link>
         </div>
 
