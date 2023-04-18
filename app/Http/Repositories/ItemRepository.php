@@ -68,4 +68,19 @@ class ItemRepository
             FacadesDB::rollback();
         }
     }
+
+    /**
+     * @param int $id
+     */
+    public function destroy(int $id)
+    {
+        try {
+            FacadesDB::beginTransaction();
+            $this->findById($id)->delete();
+            FacadesDB::commit();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            FacadesDB::rollback();
+        }
+    }
 }

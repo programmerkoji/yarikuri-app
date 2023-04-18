@@ -76,8 +76,12 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $this->ItemRepository->destroy($id);
+
+        return redirect()
+            ->route('items.index')
+            ->with('message', '項目を削除しました');
     }
 }
