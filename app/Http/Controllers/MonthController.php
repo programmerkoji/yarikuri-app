@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\MonthRepository;
+use App\Http\Requests\MonthPostRequest;
 use Illuminate\Http\Request;
 
 class MonthController extends Controller
@@ -31,10 +32,22 @@ class MonthController extends Controller
     }
 
     /**
-     * @param
+     *
      */
     public function create()
     {
         return view('months.create');
+    }
+
+    /**
+     * @param MonthPostRequest $request
+     */
+    public function store(MonthPostRequest $request)
+    {
+        $this->MonthRepository->store($request->validated());
+
+        return redirect()
+            ->route('months.index')
+            ->with('message', '年月を登録しました');
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('months', function (Blueprint $table) {
             $table->id();
-            $table->year('year');
-            $table->unsignedTinyInteger('month');
+            $table->unsignedInteger('year');
+            $table->unsignedInteger('month');
             $table->timestamps();
         });
     }
