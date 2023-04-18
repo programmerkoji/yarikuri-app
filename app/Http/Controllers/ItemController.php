@@ -82,6 +82,6 @@ class ItemController extends Controller
 
         return redirect()
             ->route('items.index')
-            ->with('message', '項目を削除しました');
+            ->with('alert', '項目を削除しました');
     }
 }

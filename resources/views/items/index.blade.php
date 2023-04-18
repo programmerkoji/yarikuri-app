@@ -63,4 +63,17 @@
             }
         }
     </script>
+    @if (session('message'))
+        <script>
+            $(function() {
+                toastr.success('{{ session("message") }}')
+            });
+        </script>
+    @elseif (session('alert'))
+    <script>
+        $(function() {
+            toastr.warning('{{ session("alert") }}')
+        });
+    </script>
+    @endif
 </x-app-layout>
