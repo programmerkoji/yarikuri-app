@@ -45,4 +45,27 @@ class MonthRepository
             FacadesDB::rollback();
         }
     }
+
+    /**
+     * @param int $id
+     */
+    public function findById(int $id)
+    {
+        return $this->month->findOrFail($id);
+    }
+
+    /**
+     * @param int $id
+     */
+    public function update(array $data, int $id)
+    {
+        try {
+            FacadesDB::beginTransaction();
+            $this->findById($id)->fill($data)->save();
+            FacadesDB::commit();
+        } catch (\Throwable $th) {
+            Log::error($th);
+            FacadesDB::rollback();
+        }
+    }
 }

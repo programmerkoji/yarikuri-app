@@ -36,8 +36,8 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center gap-2">
-                                                <a href="{{route('items.edit', ['item' => $month->id])}}" class="inline-flex text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded">編集</a>
-                                                <form id="delete_{{$month->id}}" action="{{route('items.destroy', ['item' => $month->id])}}" method="post">
+                                                <a href="{{route('months.edit', ['month' => $month->id])}}" class="inline-flex text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded">編集</a>
+                                                <form id="delete_{{$month->id}}" action="{{route('months.destroy', ['month' => $month->id])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#" data-id="{{$month->id}}" onclick="deletePost(this)" class="inline-flex text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded">削除</a>
