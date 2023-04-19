@@ -72,4 +72,17 @@ class MonthController extends Controller
             ->route('months.index')
             ->with('message', '年月を更新しました');
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function destroy(int $id)
+    {
+        $this->MonthRepository->destroy($id);
+
+        return redirect()
+            ->route('months.index')
+            ->with('alert', '項目を削除しました');
+    }
 }
