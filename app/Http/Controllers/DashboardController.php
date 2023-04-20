@@ -43,7 +43,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $items = $this->ItemRepository->index();
+        $items = $this->ItemRepository->getAllItems();
         $months = $this->MonthRepository->index();
 
         return view('dashboard', compact('items', 'months'));

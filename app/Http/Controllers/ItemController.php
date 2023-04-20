@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\ItemRepository;
 use App\Http\Requests\ItemPostRequest;
+use App\Http\Services\ItemService;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -13,12 +14,20 @@ class ItemController extends Controller
      */
     protected $item;
 
-        /**
-     * @param ItemRepository
+    /**
+     * @var ItemService
      */
-    public function __construct(ItemRepository $item)
+    protected $itemService;
+
+
+    /**
+     * @param ItemRepository $itemRepository
+     * @param ItemService $itemService
+     */
+    public function __construct(ItemRepository $itemRepository, ItemService $itemService)
     {
-        $this->ItemRepository = $item;
+        $this->ItemRepository = $itemRepository;
+        $this->itemService = $itemService;
     }
 
     /**
@@ -26,7 +35,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = $this->ItemRepository->index();
+        $items = $this->itemService->sortByItem();
         return view('items.index', compact('items'));
     }
 
@@ -44,7 +53,7 @@ class ItemController extends Controller
      */
     public function store(ItemPostRequest $request)
     {
-        $this->ItemRepository->store($request->validated());
+        $this->itemService->store($request->validated());
 
         return redirect()
             ->route('items.index')
@@ -78,7 +87,7 @@ class ItemController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->ItemRepository->destroy($id);
+        $this->itemService->destroy($id);
 
         return redirect()
             ->route('items.index')

@@ -25,9 +25,9 @@ class ItemRepository
     /**
      * @param $item
      */
-    public function index()
+    public function getAllItems()
     {
-        return $this->item->get();
+        return $this->item->all();
     }
 
     /**
@@ -55,6 +55,7 @@ class ItemRepository
     }
 
     /**
+     * @param array $data
      * @param int $id
      */
     public function update(array $data, int $id)
