@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Repositories\MonthRepository;
 use App\Http\Requests\MonthPostRequest;
+use App\Http\Services\MonthService;
 use Illuminate\Http\Request;
 
 class MonthController extends Controller
@@ -11,14 +12,21 @@ class MonthController extends Controller
     /**
      * @var MonthRepository
      */
-    protected $month;
+    protected $monthRepository;
 
-        /**
-     * @param MonthRepository
+     /**
+     * @var MonthService
      */
-    public function __construct(MonthRepository $month)
+    protected $monthService;
+
+    /**
+     * @param MonthRepository
+     * @param MonthService
+     */
+    public function __construct(MonthRepository $monthRepository, MonthService $monthService)
     {
-        $this->MonthRepository = $month;
+        $this->monthRepository = $monthRepository;
+        $this->monthService = $monthService;
     }
 
     /**
@@ -26,8 +34,7 @@ class MonthController extends Controller
      */
     public function index()
     {
-        $months = $this->MonthRepository->index();
-
+        $months = $this->monthService->sortByMultipleColumns();
         return view('months.index', compact('months'));
     }
 
@@ -44,7 +51,7 @@ class MonthController extends Controller
      */
     public function store(MonthPostRequest $request)
     {
-        $this->MonthRepository->store($request->validated());
+        $this->monthService->store($request->validated());
 
         return redirect()
             ->route('months.index')
@@ -56,7 +63,7 @@ class MonthController extends Controller
      */
     public function edit(int $id)
     {
-        $month = $this->MonthRepository->findById($id);
+        $month = $this->monthRepository->findById($id);
         return view('months.edit', compact('month'));
     }
 
@@ -66,7 +73,7 @@ class MonthController extends Controller
      */
     public function update(MonthPostRequest $request, int $id)
     {
-        $this->MonthRepository->update($request->validated(), $id);
+        $this->monthService->update($request->validated(), $id);
 
         return redirect()
             ->route('months.index')
@@ -79,7 +86,7 @@ class MonthController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->MonthRepository->destroy($id);
+        $this->monthService->destroy($id);
 
         return redirect()
             ->route('months.index')

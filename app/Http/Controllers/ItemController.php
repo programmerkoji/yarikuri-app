@@ -26,7 +26,7 @@ class ItemController extends Controller
      */
     public function __construct(ItemRepository $itemRepository, ItemService $itemService)
     {
-        $this->ItemRepository = $itemRepository;
+        $this->itemRepository = $itemRepository;
         $this->itemService = $itemService;
     }
 
@@ -65,7 +65,7 @@ class ItemController extends Controller
      */
     public function edit(int $id)
     {
-        $item = $this->ItemRepository->findById($id);
+        $item = $this->itemRepository->findById($id);
 
         return view('items.edit', compact('item'));
     }
@@ -75,7 +75,7 @@ class ItemController extends Controller
      */
     public function update(ItemPostRequest $request, int $id)
     {
-        $this->ItemRepository->update($request->validated(), $id);
+        $this->itemService->update($request->validated(), $id);
 
         return redirect()
             ->route('items.index')

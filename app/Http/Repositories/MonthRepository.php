@@ -25,9 +25,9 @@ class MonthRepository
     /**
      *
      */
-    public function index()
+    public function getAllMonths()
     {
-        return $this->month->get();
+        return $this->month->all();
     }
 
     /**

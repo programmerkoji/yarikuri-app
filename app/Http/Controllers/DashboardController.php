@@ -3,39 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\ItemMonthRepository;
-use Illuminate\Http\Request;
-use App\Http\Repositories\ItemRepository;
-use App\Http\Repositories\MonthRepository;
-use App\Models\Item;
-use App\Models\Month;
+use App\Http\Services\ItemService;
+use App\Http\Services\MonthService;
 
 class DashboardController extends Controller
 {
     /**
-     * @var ItemRepository
+     * @var ItemService
      */
-    protected $item;
+    protected $itemService;
 
     /**
-     * @var MonthRepository
+     * @var MonthService
      */
-    protected $month;
+    protected $monthService;
 
     /**
      * @var ItemMonthRepository
      */
-    protected $itemMonth;
+    protected $itemMonthRepository;
 
     /**
-     * @param ItemRepository
-     * @param MonthRepository
+     * @param ItemService
+     * @param MonthService
      * @param ItemMonthRepository
      */
-    public function __construct(ItemRepository $item, MonthRepository $month, ItemMonthRepository $itemMonth)
+    public function __construct(ItemService $itemService, MonthService $monthService, ItemMonthRepository $itemMonthRepository)
     {
-        $this->ItemRepository = $item;
-        $this->MonthRepository = $month;
-        $this->ItemMonthRepository = $itemMonth;
+        $this->itemService = $itemService;
+        $this->monthService = $monthService;
+        $this->itemMonthRepository = $itemMonthRepository;
     }
 
     /**
@@ -43,8 +40,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $items = $this->ItemRepository->getAllItems();
-        $months = $this->MonthRepository->index();
+        $items = $this->itemService->index();
+        $months = $this->monthService->sortByMultipleColumns();
 
         return view('dashboard', compact('items', 'months'));
     }
