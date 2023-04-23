@@ -26,22 +26,17 @@
                                             {{$month->year}}年{{$month->month}}月
                                         </th>
                                         @foreach ($items as $item)
-
                                             <td class="px-6 py-4">
                                                 <div class="flex items-center justify-center">
-                                                    <form id="check_{{$item->id}}{{$month->id}}" method="post" action="{{route("dashboard.store")}}">
+                                                    <form id="check_{{$item->id}}{{$month->id}}" action="{{route('dashboard.update'), [itemMonth, $itemMonth]}}" method="post">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="">
-                                                        <input type="hidden" name="item_id" value="{{$item->id}}">
-                                                        <input type="hidden" name="month_id" value="{{$month->id}}">
+                                                        @method('PUT')
                                                         <input
                                                             id="default-checkbox"
                                                             type="checkbox"
-                                                            name="is_checked"
+                                                            name="checkbox[{{$month->id}}][{{$item->id}}]"
+                                                            @if ($item->isChecked($month->id)) checked @endif
                                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                            @if ($item->months->where('id', $month->id)->first() && $item->months->where('id', $month->id)->first()->pivot->is_checked)
-                                                                checked
-                                                            @endif
                                                             onclick="checkPost(this)"
                                                             data-id="{{$item->id}}{{$month->id}}">
                                                     </form>
@@ -59,9 +54,11 @@
     </div>
     <script>
         function checkPost(e) {
-            console.log(e.dataset.id);
+            console.log(e);
             'use strict';
-            document.getElementById('check_' + e.dataset.id).submit();
+            if (confirm('本当に削除してもよいですか？')) {
+                document.getElementById('check_' + e.dataset.id).submit();
+            }
         }
     </script>
 </x-app-layout>
