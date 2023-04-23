@@ -27,4 +27,20 @@ class ItemMonthRepository
     {
         return $this->itemMonth->get();
     }
+
+    /**
+     *
+     */
+    public function getItemMonth($itemId, $monthId)
+    {
+        return $this->itemMonth->where('item_id', $itemId)->where('month_id', $monthId)->first();
+    }
+
+    /**
+     *
+     */
+    public function createOrUpdateItemMonth($id, $data)
+    {
+        $this->itemMonth->updateOrCreate(['id' => $id], $data);
+    }
 }

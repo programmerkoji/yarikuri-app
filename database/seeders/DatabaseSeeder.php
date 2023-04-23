@@ -15,12 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Item::factory(20)->create();
+        Month::factory(20)->create();
+
         $this->call([
             UserSeeder::class,
             // ItemSeeder::class,
             // MonthSeeder::class,
+            ItemMonthSeeder::class
         ]);
-        Item::factory(20)->create();
-        Month::factory(20)->create();
     }
 }
