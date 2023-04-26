@@ -29,10 +29,7 @@ class MonthService
 
     public function sortByMultipleColumns()
     {
-        return $this->index()->sortBy([
-            ['year', 'desc'],
-            ['month', 'desc']
-        ]);
+        return $this->monthRepository->getAllMonthsPaginate();
     }
 
     /**

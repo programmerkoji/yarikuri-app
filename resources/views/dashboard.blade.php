@@ -53,13 +53,15 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-4">
+                        {{$months->links('vendor.pagination.simple-tailwind')}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
         function checkPost(e) {
-            console.log(e.dataset.id);
             'use strict';
             document.getElementById('check_' + e.dataset.id).submit();
         }

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class MonthRepository
 {
+    const PAGINATE = 12;
+
     /**
      * @var Month
      */
@@ -20,6 +22,16 @@ class MonthRepository
     public function __construct(Month $month)
     {
         $this->month = $month;
+    }
+
+    /**
+     *
+     */
+    public function getAllMonthsPaginate()
+    {
+        return $this->month->orderBy('year', 'desc')
+            ->orderBy('month', 'desc')
+            ->paginate(self::PAGINATE);
     }
 
     /**
